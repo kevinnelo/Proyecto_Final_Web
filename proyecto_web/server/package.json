@@ -1,0 +1,23 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@googlemaps/google-maps-services-js": "^3.4.2",
+    "axios": "^1.13.2",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "leaflet": "^1.9.4",
+    "mongoose": "^8.19.3",
+    "node-geocoder": "^4.4.1",
+    "react-leaflet": "^5.0.0"
+  }
+}

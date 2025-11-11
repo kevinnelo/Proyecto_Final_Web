@@ -1,0 +1,77 @@
+.copiar-btn {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.copiar-btn:hover {
+  background: #0056b3;
+}
+
+.copiado-mensaje {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #28a745;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: bold;
+  z-index: 1000;
+  animation: fade 2s forwards;
+}
+
+@keyframes fade {
+  0%, 80% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.copiado-mensaje a {
+  color: #fff;
+  text-decoration: underline;
+  margin-left: 5px;
+}
+
+.eliminar-btn {
+  background: #e74c3c;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.eliminar-btn:hover {
+  background: #c0392b;
+}
+
+.navbar {
+  background: #2c3e50;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-bottom: 20px;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.1rem;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+
+.nav-link:hover {
+  background: #34495e;
+}
