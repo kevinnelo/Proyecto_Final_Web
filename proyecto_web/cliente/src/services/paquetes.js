@@ -1,3 +1,4 @@
+//Accede al backend para gestionar paquetes
 import api from './api';
 
 // Crear paquete
@@ -13,6 +14,7 @@ export const buscarPorGuia = (guia) => api.get(`/paquetes/${guia}`);
 export const actualizarEstado = (id, estado) =>
     api.put(`/paquetes/${id}`, { estado });
 
+//Utilizamos fetch para eliminar paquete
 export const eliminarPaquete = async (id) => {
   const res = await fetch(`http://localhost:5000/api/paquetes/${id}`, {
     method: 'DELETE',

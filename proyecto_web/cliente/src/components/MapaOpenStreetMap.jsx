@@ -4,7 +4,7 @@ import { buscarPorGuia } from '../services/paquetes';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 
-// FIX ICONOS LEAFLET
+
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
@@ -21,10 +21,12 @@ const containerStyle = {
   margin: '20px 0'
 };
 
+//Llama numero de guia como prop
 export default function MapaOpenStreetMap({ numeroGuia }) {
   const [paquete, setPaquete] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  //Carga Guia desde el BackeEnd
   useEffect(() => {
     const cargar = async () => {
       try {
@@ -42,6 +44,7 @@ export default function MapaOpenStreetMap({ numeroGuia }) {
   if (loading) return <p style={{ textAlign: 'center' }}>Cargando mapa...</p>;
   if (!paquete) return <p style={{ textAlign: 'center', color: 'red' }}>Paquete no encontrado</p>;
 
+  //Procesar centro del mapa
   const posiciones = paquete.historial.map(h => [h.lat, h.lng]);
   const centro = posiciones[posiciones.length - 1] || [4.6097, -74.0817];
 
@@ -55,12 +58,14 @@ export default function MapaOpenStreetMap({ numeroGuia }) {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         />
+        {/* Crea una linea roja entre cada punto del historial */}
         <Polyline
           positions={posiciones}
           color="#e74c3c"
           weight={5}
           opacity={0.8}
         />
+        {/* Muestra cada punto por cada punto del historial */}
         {paquete.historial.map((h, i) => (
           <Marker key={i} position={[h.lat, h.lng]}>
             <Popup>

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { crearPaquete } from '../services/paquetes';
 
+//Formulario para Crear un nuevo paquete
 export default function PaqueteForm({ onPaqueteCreado }) {
   const [form, setForm] = useState({
     destinatario: '',
@@ -13,22 +14,24 @@ export default function PaqueteForm({ onPaqueteCreado }) {
   const handleSubmit = async (e) => {
   e.preventDefault();
 
-  
+  //Valida que los campos del formulario esten completos
   if (!form.destinatario || !form.direccion || !form.peso) {
     alert('Por favor completa todos los campos');
     return;
   }
   
+  //Lama la funcion del backend para crear un paquete
   try {
     await crearPaquete(form);
     alert('Paquete creado con éxito');
 
-    // LIMPIAR
+    // el formulario despues del registro
     setForm({ destinatario: '', direccion: '', peso: '' });
 
     // LIMPIAR MAPA
     if (onPaqueteCreado) onPaqueteCreado();
 
+    //si falla el llamado al backend igual se limpia el formulario
   } catch (err) {
     setForm({ destinatario: '', direccion: '', peso: '' });
   }

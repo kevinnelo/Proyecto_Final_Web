@@ -1,5 +1,7 @@
+//Permite hacer peticiones HTTP al backend
 import axios from 'axios';
 
+//Se defne la direccion del backend de donde se realizaran peticiones
 const api = axios.create({
   baseURL: 'http://localhost:5000/api',
   timeout: 10000,
@@ -7,7 +9,7 @@ const api = axios.create({
     'Content-Type': 'application/json',
   },
 });
-
+  //Interceptor de respuesta
 api.interceptors.response.use(
   (response) => response,
   (error) => {

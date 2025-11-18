@@ -2,10 +2,12 @@ import { useState, useEffect } from 'react';
 import { obtenerPaquetes, actualizarEstado } from '../services/paquetes';
 import MapaModal from './MapaModal'; // ← IMPORTA EL MODAL
 
+//Contenido de lista de paquetes y de numero de guias
 export default function PaquetesTable({ onCopiarGuia, onSeleccionarGuia, onEliminarPaquete }) {
   const [paquetes, setPaquetes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [mapaAbierto, setMapaAbierto] = useState(null);
+
 
   useEffect(() => {
     cargar();
@@ -13,6 +15,7 @@ export default function PaquetesTable({ onCopiarGuia, onSeleccionarGuia, onElimi
     return () => clearInterval(interval);
   }, []);
 
+  //Llama al backend y guarda su respuesta en paquetes
   const cargar = async () => {
     try {
       const res = await obtenerPaquetes();
@@ -24,6 +27,7 @@ export default function PaquetesTable({ onCopiarGuia, onSeleccionarGuia, onElimi
     }
   };
 
+  //Llama el backend para actualizar el estado del paquete
   const cambiarEstado = async (mongoId, nuevoEstado) => {
     try {
       const res = await actualizarEstado(mongoId, nuevoEstado);
@@ -75,6 +79,8 @@ export default function PaquetesTable({ onCopiarGuia, onSeleccionarGuia, onElimi
                   <td style={{ padding: '10px' }}>{p.destinatario}</td>
                   <td style={{ padding: '10px' }}>{p.estado}</td>
                   <td style={{ padding: '10px' }}>
+                    
+                    {/* Select para cambiar el estado del paquete*/}
                     <select
                       value={p.estado}
                       onChange={(e) => cambiarEstado(p._id, e.target.value)}

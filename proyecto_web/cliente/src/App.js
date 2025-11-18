@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import RastreoPage from './pages/RastreoPage';
 import './App.css';
 
+
 function App() {
   const [guiaSeleccionada, setGuiaSeleccionada] = useState('');
   const [paquetes, setPaquetes] = useState([]);
@@ -82,9 +83,6 @@ function App() {
               </div>
             )}
 
-            <footer>
-              <p>Frontend: http://localhost:3000 | Backend: http://localhost:5000</p>
-            </footer>
           </div>
         } />
 

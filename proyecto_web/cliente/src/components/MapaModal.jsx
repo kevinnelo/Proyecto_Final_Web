@@ -4,7 +4,7 @@ import { buscarPorGuia } from '../services/paquetes';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 
-// FIX ICONOS LEAFLET
+
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
@@ -12,11 +12,12 @@ L.Icon.Default.mergeOptions({
   shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
 });
 
-// ÚNICO MAPAMODAL
+
 export default function MapaModal({ guia, onClose }) {
   const [paquete, setPaquete] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  // Carga Guia desde el BackEnd
   useEffect(() => {
     const cargar = async () => {
       try {
@@ -31,9 +32,11 @@ export default function MapaModal({ guia, onClose }) {
     if (guia) cargar();
   }, [guia]);
 
+
   if (loading) return <div style={{ padding: '20px', textAlign: 'center' }}>Cargando mapa...</div>;
   if (!paquete) return <div style={{ padding: '20px', textAlign: 'center', color: 'red' }}>Paquete no encontrado</div>;
 
+  //Procesar centro Mapa
   const posiciones = paquete.historial.map(h => [h.lat, h.lng]);
   const centro = posiciones[0] || [4.6097, -74.0817];
 
@@ -87,7 +90,6 @@ export default function MapaModal({ guia, onClose }) {
               fontWeight: 'bold'
             }}
           >
-            X
           </button>
         </div>
         <div style={{ height: '500px' }}>

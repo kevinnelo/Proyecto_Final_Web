@@ -12,10 +12,12 @@ L.Icon.Default.mergeOptions({
   shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
 });
 
+//Busca paquete por numero de Guia
 export default function MapaRastreo({ numeroGuia }) {
   const [paquete, setPaquete] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  //Carga Paquete por numero de Guia
   useEffect(() => {
     const cargar = async () => {
       try {
@@ -33,7 +35,9 @@ export default function MapaRastreo({ numeroGuia }) {
   if (loading) return <p>Cargando mapa...</p>;
   if (!paquete) return <p>Paquete no encontrado</p>;
 
+  //Convierte cada punto del mapa en una coordenada
   const posiciones = paquete.historial.map(h => [h.lat, h.lng]);
+  //Define Centro del Mapa
   const centro = posiciones[posiciones.length - 1] || [4.6097, -74.0817]; // Bogotá
 
   return (
@@ -47,7 +51,10 @@ export default function MapaRastreo({ numeroGuia }) {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         />
+        {/* Ruta de rastreo de color azul */}
         <Polyline positions={posiciones} color="blue" weight={4} opacity={0.7} />
+        
+        {/* Marca cada punto del historial */}
         {paquete.historial.map((h, i) => (
           <Marker key={i} position={[h.lat, h.lng]}>
             <Popup>

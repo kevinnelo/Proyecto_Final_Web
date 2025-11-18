@@ -3,12 +3,11 @@ const router = express.Router();
 const NodeGeocoder = require('node-geocoder');
 const Paquete = require('../db');
 
-// GEOCODER GRATIS: OpenStreetMap
 const geocoder = NodeGeocoder({
   provider: 'openstreetmap'
 });
 
-// GEOCODIFICAR DIRECCIÓN REAL
+// Obtiene una direccion y la convierte en coordenadas lat y long
 async function geocodeAddress(address) {
   try {
     const res = await geocoder.geocode(address + ', Bogotá, Colombia');
